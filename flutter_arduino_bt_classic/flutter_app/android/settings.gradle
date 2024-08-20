@@ -1,4 +1,10 @@
 pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    
     def flutterSdkPath = {
         def properties = new Properties()
         file("local.properties").withInputStream { properties.load(it) }
@@ -11,10 +17,13 @@ pluginManagement {
     includeBuild("${settings.ext.flutterSdkPath}/packages/flutter_tools/gradle")
 
     plugins {
+        id "com.android.application" version "7.4.0" apply false
+        id "com.android.library" version "7.4.0" apply false
+        id "org.jetbrains.kotlin.android" version "1.8.0" apply false
         id "dev.flutter.flutter-gradle-plugin" version "1.0.0" apply false
     }
 }
 
 include ":app"
 
-apply from: "${settings.ext.flutterSdkPath}/packages/flutter_tools/gradle/app_plugin_loader.gradle"
+// You don't need to use 'apply from' for Flutter Gradle plugin in this setup

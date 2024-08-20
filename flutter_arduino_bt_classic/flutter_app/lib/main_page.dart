@@ -144,7 +144,8 @@ class _MainPageState extends State<MainPage> {
                           onPressed: () async {
                             setState(() => _isConnecting = true);
 
-                            _connection = await BluetoothConnection.toAddress(device.address);
+                            _connection = await BluetoothConnection.toAddress(
+                                device.address);
                             _deviceConnected = device;
                             _devices = [];
                             _isConnecting = false;

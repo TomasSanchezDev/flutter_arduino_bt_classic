@@ -1,16 +1,18 @@
+// The buildscript block sets up the dependencies for Gradle itself
 buildscript {
-    ext.kotlin_version = '1.7.10'
+    ext.kotlin_version = '1.8.0' // Updated Kotlin version
     repositories {
         google()
         mavenCentral()
     }
-
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.0'
+        classpath 'com.android.tools.build:gradle:7.4.0' // Updated Android Gradle Plugin version
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // You can add other classpath dependencies here if needed
     }
 }
 
+// The allprojects block defines repositories to use for all projects
 allprojects {
     repositories {
         google()
@@ -18,14 +20,18 @@ allprojects {
     }
 }
 
+// Define the build directory for all subprojects
 rootProject.buildDir = '../build'
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
+
+// Ensure that the app project is evaluated before others
 subprojects {
     project.evaluationDependsOn(':app')
 }
 
+// Register a clean task to delete the build directory
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
